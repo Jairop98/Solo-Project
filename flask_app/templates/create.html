@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Add Item</title>
+</head>
+<body>
+    <div>
+    <br>
+    <br>
+    <h2 class="text-center text-success">Add a New Item!</h2>
+    <div class="container">
+        <a class="btn btn-primary" href="/dashboard">Home</a>
+        <a class="btn btn-danger float-right" href="/logout">Logout</a>
+    </div>
+    <form action="/user/create" method="post" class="col-6 mx-auto">
+        <div class="alert alert-success" role="alert">
+            {% with messages = get_flashed_messages() %}<!-- declare a variable called messages -->
+            {% if messages %}   <!-- check if there are any messages -->
+                {% for message in messages %}   <!-- loop through the messages -->
+                    <p>{{message}}</p>  <!-- display each message in a paragraph tag -->
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+        <div class="form-group">
+            <input type="text" name="item_name" placeholder="Item name" class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="text" name="description" placeholder="I need this because" class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="text" name="store_name" placeholder="Where to buy" class="form-control">
+        </div>
+        <input type="submit" value="Add" class="btn btn-success">
+    </form>
+</body>
+</html>

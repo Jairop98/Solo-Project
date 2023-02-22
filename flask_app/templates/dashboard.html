@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <br>
+    <br>
+    <div class="background">
+        <h1 class="text-center">Welcome to Family Shopping {{user.first_name}}!</h1>
+        <div class="container">
+            <a class="btn btn-primary" href="/create">+ Create</a>
+            <a class="btn btn-danger float-right" href="/logout">Logout</a>
+        </div>
+        <h2 class="text-center text-light">All Items Requested</h2>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="table-success">
+                            <th>Who requested:</th>
+                            <th>Item:</th>
+                            <th>I need this because: </th>
+                            <th>Where to buy:</th>
+                            <th>Actions: </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in the_item %}
+                        <tr class="table-primary">
+                            <td>{{ item.userself.first_name }}</td>
+                            <td>{{ item.item_name }}</td>
+                            <td>{{ item.description}}</td>
+                            <td>{{ item.store_name }}</td>
+                            <td>
+                                <a href="/details/{{ item.id }}">Item</a>
+                                {% if session['user_id'] == item.userself.id %}
+                                <a href="/edit/{{ item.id }}">Edit</a> 
+                                <a href="/destroy/{{ item.id }}">Bought/Delete</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="table-success">
+                            <th>My Items:</th>
+                            <th>Actions: </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in the_item %}
+                        <tr class="table-warning">
+                            {% if session['user_id'] == item.userself.id %}
+                            <td>
+                                {{ item.item_name }}
+                            </td>
+                            <td>
+                                <a href="/details/{{ item.id }}">Item</a>
+                                {% if session['user_id'] == item.userself.id %}
+                                <a href="/destroy/{{ item.id }}">Bought/Delete</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

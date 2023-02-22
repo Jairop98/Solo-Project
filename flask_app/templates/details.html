@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <br>
+    <br>
+    <h1 class="text-center text-success">Details</h1>
+    <div class="container">
+        <a class="btn btn-primary" href="/dashboard">Home</a>
+        <a class="btn btn-danger float-right" href="/logout">Logout</a>
+    </div>
+    <form class="col-6 mx-auto">
+        <div>
+            <ul class="list-group form-group">
+                <li class="list-group-item list-group-item-primary">Item wanted: {{item.item_name}}</li>
+                <li class="list-group-item list-group-item-success">Why its needed: {{item.description}}</li>
+                <li class="list-group-item list-group-item-warning">Where to buy: {{item.store_name}}</li>
+                <li class="list-group-item list-group-item-info">Requested by: {{item.userself.first_name}} {{item.userself.last_name}}</li>
+            </ul>
+        </div>
+    </form>
+</body>
+</html>
